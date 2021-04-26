@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<div class="center">
+    <table>
+    {% for item in photos%}
+        {% if loop.index0 % 3 == 0 %}
+        <tr>
+            <td>
+                <div class = "card border-secondary mb-3" style = "max-width: 50rem;">
+                    <div class = "card-body">
+                        <img src="{{ url_for('static', filename=item.name) }}" width="300" height="300">
+                    </div>
+                </div>
+            </td>
+        {% elif loop.index0 % 3 == 1 %}
+            <td>
+                <div class = "card border-secondary mb-3" style = "max-width: 50rem;">
+                    <div class = "card-body">
+                        <img src="{{ url_for('static', filename=item.name) }}" width="300" height="300">
+                    </div>
+                </div>
+            </td>
+        {% else %}
+            <td>
+                <div class = "card border-secondary mb-3" style = "max-width: 50rem;">
+                    <div class = "card-body">
+                        <img src="{{ url_for('static', filename=item.name) }}" width="300" height="300">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

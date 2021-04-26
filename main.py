@@ -3,6 +3,7 @@ from flask_admin.contrib.fileadmin import FileAdmin
 
 from data import db_session, news_api, application_api
 from data.application import Application
+from data.photo import Photo
 from data.users import User
 from data.news import News
 import datetime
@@ -26,13 +27,15 @@ app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 
 db_session.global_init("db/blogs.db")
 # администрирование сайтом
-admin = Admin(app, name='хроники серых грродов ADMIN', template_mode='bootstrap4')
+admin = Admin(app, name='хроники серых городов', template_mode='bootstrap4')
 db_s = db_session.create_session()
 admin.add_view(ModelView(User, db_s))
 admin.add_view(ModelView(News, db_s))
 admin.add_view(ModelView(Application, db_s))
-path = op.join(op.dirname(__file__), '')
-admin.add_view(FileAdmin(path, '/', name='Files'))
+admin.add_view(ModelView(Photo, db_s))
+path2 = op.join(op.dirname(__file__), 'static')
+admin.add_view(FileAdmin(path2, '/static/', name='Load_photo'))
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -135,6 +138,13 @@ def delete_applications(id):
     else:
         abort(404)
     return redirect('/applications')
+
+@app.route("/photo")
+def photo():
+    db_sess = db_session.create_session()
+    ph = db_sess.query(Photo)
+
+    return render_template("photo.html", title="фотографии", photos=ph)
 
 @app.route('/contact')
 def contact():
