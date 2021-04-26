@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for( 'static', filename='bootstrap.css')}}">
+    <title>{{title}}</title>
+</head>
+<body background="{{ url_for('static', filename='s.jpg') }}">
+<header>
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand" href="/">хроники серых городов</a>
+        <p>
+            <a class="btn btn-primary " href="/home">Новости</a>
+            <a class="btn btn-primary " href="/applications">Заявка</a>
+            <a class="btn btn-primary " href="/contact">Контакты</a>
+
+        </p>
+    {% if current_user.is_authenticated %}
+    <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+    {% else %}
+    <p>
+        <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+        <a class="btn btn-success" href="/login">Войти</a>
+    </p>
+{% endif %}
+    </nav>
+</header>
+<div>
+<div class = "jumbotron">
+<h1 class="display-3">Мы ищем таланты!</h1>
+<blockquote class = "blockquote">
+  <p class = "mb-0">
+      <font style = "vertical-align: inherit;">
+      <font style = "vertical-align: inherit;"> Если вы умеете писать интересные стихи или тексты для песен, мы ждём именно вас! <br>
+          Скорее переходите в поле для заполнения заявок!
+      </font>
+      </font>
+  </p>
+</blockquote>
+</div>
+<div class="jumbotron">
+    <h4  class="display-4">Наш проект</h4>
+    <p class="lead">Группа Хроники Серых Городов - это поект, где каждый человек, имеющий желание создать историю в музыкальной форме и какие-либо идеи для реализации своего желания, может создать свою песню и выложить ее под псевдонимом этого проекта.
+    </p>
+  <h4 class="display-4">Наши цели</h4>
+  <p class="lead">
+      Основная цель этого проекта - объединить музыкантов разной жанровой задачи и создать концептуальную группу, в которой основной упор будет сделан на тексты
+  </p>
+
+</div>
+</div>
+</body>
+</html>

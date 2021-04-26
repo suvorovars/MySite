@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+{% for item in applic%}
+{% if current_user.is_authenticated and current_user == item.user and item.viewed == True %}
+<div class="card border-success mb-3" style="max-width: 100rem;">
+  <div class="card-header">{{item.title}}</div>
+  <div class="card-body">
+    <h4 class="card-title">Идея песни</h4>
+    <p class="card-text">{{item.content}}</p>
+    <h4 class="card-title">Текст песни</h4>
+    <p class="card-text">{{item.text}}</p>
+      <p class="card-text"><small>Просмотренно</small></p>
+  </div>
+</div>
+{% elif current_user.is_authenticated and current_user == item.user and item.viewed != True %}
+<div class="card border-secondary mb-3" style="max-width: 100rem;">
+  <div class="card-header">{{item.title}}</div>
+  <div class="card-body">
+    <h4 class="card-title">Идея песни</h4>
+    <p class="card-text">{{item.content}}</p>
+    <h4 class="card-title">Текст песни</h4>
+    <p class="card-text">{{item.text}}</p>
+      <p class="card-text"><small>Не просмотренно</small></p>
+  </div>
+  <div>
+        <a href="/change_applications/{{ item.id }}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/delete_applications/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<div>
+    <a href="/add_applications" class="btn btn-secondary">создать заявку</a>
+</div>
+{% else %}
+<div class="jumbotron">
+    <h2>Вы еще не зашли в аккаунт</h2>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Новостная лента</h1>
+{% for item in news%}
+<div class = "card border-secondary mb-3" style = "max-width: 100rem;">
+  <div class = "card-header"> <font style = "vertical-align: inherit;"> <font style = "vertical-align: inherit;">Дата написания - {{item.created_date}}</font> </font> </div>
+  <div class = "card-body">
+    <h4 class = "card-title"> <font style = "vertical-align: inherit;"> <font style = "vertical-align: inherit;"> {{item.title}} </font> </font> </h4 >
+    <p class = "card-text"> <font style = "vertical-align: inherit;"> <font style = "vertical-align: inherit;"> {{item.content}} </font> </font> </p>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

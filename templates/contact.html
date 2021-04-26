@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Контакты разработчиков и музыкантов проекта</h1>
+
+<div class = "card text-white bg-primary mb-3" style = "max-width: 40rem;">
+  <div class = "card-header"> <font style = "vertical-align: inherit;"> <font style = "vertical-align: inherit;">
+
+      Суворов Арсений</font> </font> </div>
+
+  <div class = "card-body">
+    <p><img src="{{ url_for('static', filename='face.jpg') }}" width="200" height="200"
+  alt="Иллюстрация" align="left"
+  vspace="5" hspace="5">
+    <h4 class = "card-title"> <font style = "vertical-align: inherit;"> <font style = "vertical-align: inherit;">Главный разрабодчик и основатель проекта </font> </font> </h4 >
+    <p class = "card-text"> <font style = "vertical-align: inherit;"> <font style = "vertical-align: inherit;">
+      <a class="btn btn-success" href="http://suvorovars@gmail.com">Почта</a>
+      <a class="btn btn-success" href="https://vk.com/i_am_npc">ВКонтакте</a>
+      <br>
+      <a class="btn btn-success" href="https://www.instagram.com/suvorovars/">Инстаграм</a>
+      <a class="btn btn-success" href="https://t.me/i_am_npc">Телеграм</a>
+    </font> </font> </p>
+    </p>
+  </div>
+</div>
+
+{% endblock %}
