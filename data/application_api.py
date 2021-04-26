@@ -3,7 +3,6 @@ from flask import jsonify, request
 
 from . import db_session
 from .application import Application
-from .news import News
 
 blueprint = flask.Blueprint(
     'application_api',
@@ -18,22 +17,22 @@ def get_news():
     applic = db_sess.query(Application).all()
     return jsonify(
         {
-            'news':
+            'application':
                 [item.to_dict(only=('title', 'content', 'text', 'feedback', 'user.name', 'created_date'))
                  for item in applic]
         }
     )
 
 
-@blueprint.route('/api/application/<int:news_id>', methods=['GET'])
-def get_one_news(news_id):
+@blueprint.route('/api/application/<int:applic_id>', methods=['GET'])
+def get_one_news(applic_id):
     db_sess = db_session.create_session()
-    news = db_sess.query(News).get(news_id)
-    if not news:
+    applic = db_sess.query(Application).get(applic_id)
+    if not applic:
         return jsonify({'error': 'Not found'})
     return jsonify(
         {
-            'news': news.to_dict(only=(
+            'application': applic.to_dict(only=(
                 'title', 'content', 'text', 'feedback', 'user.name', 'created_date'))
         }
     )
@@ -47,7 +46,7 @@ def create_news():
                  ['title', 'content', 'text', 'feedback', 'user_id', 'created_date']):
         return jsonify({'error': 'Bad request'})
     db_sess = db_session.create_session()
-    news = News(
+    applic = Application(
         title=request.json['title'],
         content=request.json['content'],
         text=request.json['text'],
@@ -56,17 +55,17 @@ def create_news():
         created_date=request.json['created_date']
 
     )
-    db_sess.add(news)
+    db_sess.add(applic)
     db_sess.commit()
     return jsonify({'success': 'OK'})
 
 
-@blueprint.route('/api/application/<int:news_id>', methods=['DELETE'])
-def delete_news(news_id):
+@blueprint.route('/api/application/<int:applic_id>', methods=['DELETE'])
+def delete_news(applic_id):
     db_sess = db_session.create_session()
-    news = db_sess.query(News).get(news_id)
-    if not news:
+    applic = db_sess.query(Application).get(applic_id)
+    if not applic:
         return jsonify({'error': 'Not found'})
-    db_sess.delete(news)
+    db_sess.delete(applic)
     db_sess.commit()
     return jsonify({'success': 'OK'})
